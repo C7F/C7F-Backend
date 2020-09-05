@@ -17,7 +17,7 @@ export const registerValidation = Joi.object({
 });
 
 export const tokenLoginValidation = Joi.object({
-    loginToken
+    loginToken,
 });
 
 export interface Team {

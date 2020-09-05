@@ -3,35 +3,37 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
 
-import { loginValidation, registerValidation, Team, tokenLoginValidation } from '../models/team';
+import {
+    loginValidation, registerValidation, Team, tokenLoginValidation,
+} from '../models/team';
 import knex from '../models/db';
 import { errors } from '../constants';
 
 async function generateJWT(team: Team) {
-    return await jwt.sign({
+    return jwt.sign({
         name: team.name,
         email: team.email,
     },
     process.env.JWT_SECRET,
     {
-        expiresIn: "10 days",
+        expiresIn: '10 days',
     });
 }
 
 const router = Router();
 
 // TODO: Move constants to another file
-router.post("/login", async (req, res, next) => {
+router.post('/login', async (req, res) => {
     const valid = loginValidation.validate(req.body);
-    if (valid.error) {  
+    if (valid.error) {
         return res.status(400).json({
             success: true,
             error: errors.validationError,
-            message: valid.error.message
+            message: valid.error.message,
         });
     }
 
-    const team = await knex<Team>("teams").where("name", req.body.name).first();
+    const team = await knex<Team>('teams').where('name', req.body.name).first();
     if (!team || !(await bcrypt.compare(req.body.password, team.password))) {
         // Invalid team name or password
         return res.status(400).json({
@@ -40,25 +42,24 @@ router.post("/login", async (req, res, next) => {
         });
     }
 
-
     return res.json({
         success: true,
         token: await generateJWT(team),
     });
 });
 
-router.post("/tokenLogin", async (req, res, next) => {
+router.post('/tokenLogin', async (req, res) => {
     const valid = tokenLoginValidation.validate(req.body);
 
-    if (valid.error) {  
+    if (valid.error) {
         return res.status(400).json({
             success: true,
             error: errors.validationError,
-            message: valid.error.message
+            message: valid.error.message,
         });
     }
 
-    const team = await knex<Team>("teams").where("login_token", req.body.loginToken).first();
+    const team = await knex<Team>('teams').where('login_token', req.body.loginToken).first();
 
     if (!team) {
         return res.status(400).json({
@@ -72,24 +73,26 @@ router.post("/tokenLogin", async (req, res, next) => {
     });
 });
 
-router.post("/register", async (req, res, next) => {
+router.post('/register', async (req, res) => {
     const valid = registerValidation.validate(req.body);
 
     if (valid.error) {
-        return res.status(400).json({
+        res.status(400).json({
             success: false,
             error: errors.validationError,
-            message: valid.error.message
+            message: valid.error.message,
         });
+        return;
     }
 
-    const team = await knex<Team>("teams").where("name", req.body.name).first();
+    const team = await knex<Team>('teams').where('name', req.body.name).first();
 
     if (team) {
-        return res.status(400).json({
+        res.status(400).json({
             success: false,
             error: errors.teamNotUnique,
-        })
+        });
+        return;
     }
 
     // TODO: Send verification email
@@ -102,13 +105,13 @@ router.post("/register", async (req, res, next) => {
         email_verification_token: v4(),
         login_token: v4(),
         password_reset_token: null,
-    }
+    };
 
-    await knex<Team>("teams").insert(newTeam);
+    await knex<Team>('teams').insert(newTeam);
 
     res.json({
         success: true,
-    })
+    });
 });
 
 export default router;

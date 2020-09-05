@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "lint": "eslint \"src/**/*.{ts,js,jsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix"
   },
   "repository": {
     "type": "git",
