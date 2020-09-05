@@ -1,7 +1,7 @@
 {
   "name": "c7f-backend",
   "version": "1.0.0",
-  "description": "[![Issues][issues-shield]][issues-url]",
+  "description": "Backend for C7F platform.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
