@@ -11,7 +11,7 @@ const app = express();
 app.set('PORT', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
-const NODE_ENV = process.env.NODE_ENV;
+const { NODE_ENV } = process.env;
 if (NODE_ENV === 'dev') {
     app.use(cors());
 }

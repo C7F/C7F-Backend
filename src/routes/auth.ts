@@ -4,7 +4,10 @@ import jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
 
 import {
-    loginValidation, registerValidation, Team, tokenLoginValidation,
+    Team,
+    loginValidation,
+    registerValidation,
+    tokenLoginValidation,
 } from '../models/team';
 import knex from '../models/db';
 import { errors } from '../constants';
