@@ -10,7 +10,7 @@ import {
     tokenLoginValidation,
 } from '../models/team';
 import knex from '../models/db';
-import { errors } from '../constants';
+import { errors } from '../utils/constants';
 
 async function generateJWT(team: Team) {
     return jwt.sign({
