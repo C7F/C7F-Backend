@@ -20,6 +20,11 @@
     "url": "https://github.com/C7F/C7F-Backend/issues"
   },
   "homepage": "https://github.com/C7F/C7F-Backend#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "dependencies": {
     "@types/cors": "^2.8.7",
     "bcrypt": "^5.0.0",
@@ -45,6 +50,7 @@
     "eslint": "^7.8.1",
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
+    "husky": "^4.3.0",
     "ts-node-dev": "^1.0.0-pre.62",
     "typescript": "^4.0.2"
   }
