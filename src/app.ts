@@ -2,7 +2,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
+
 import appRoutes from './routes';
+import logger from './utils/logger';
 
 dotenv.config();
 
@@ -19,5 +21,5 @@ if (NODE_ENV === 'dev') {
 app.use(appRoutes);
 
 app.listen(app.get('PORT'), () => {
-    console.log('Server listening on port ', app.get('PORT'));
+    logger.info(`Server listening on port ${app.get('PORT')}.`);
 });
