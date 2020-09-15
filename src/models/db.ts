@@ -1,12 +1,15 @@
 import Knex from 'knex';
+
 import config from '../knexfile';
+import { database } from '../utils/constants';
+import logger from '../utils/logger';
 
 const knex = Knex(config);
 
 knex.raw("SELECT 'test connection';").then(() => {
-    console.log('Connected to database successfully');
+    logger.info(database.connectionSuccess);
 }).catch((err) => {
-    console.log('Failed to connect to database');
+    logger.error(database.connectionFailure);
     throw err;
 });
 
