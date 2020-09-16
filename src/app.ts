@@ -13,9 +13,15 @@ const app = express();
 app.set('PORT', process.env.PORT || 3000);
 app.use(bodyParser.json());
 
-const { NODE_ENV } = process.env;
-if (NODE_ENV === 'dev') {
-    app.use(cors());
+const { ALLOW_CORS, ALLOWED_ORIGINS } = process.env;
+if (ALLOW_CORS === 'true') {
+    const corsOptions = {
+        origin: ALLOWED_ORIGINS ? ALLOWED_ORIGINS.split(',') : '*',
+    };
+
+    app.use(cors(
+        corsOptions,
+    ));
 }
 
 app.use(appRoutes);
