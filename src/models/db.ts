@@ -10,6 +10,7 @@ knex.raw("SELECT 'test connection';").then(() => {
     logger.info(database.connectionSuccess);
 }).catch((err) => {
     logger.error(database.connectionFailure);
+    process.exit(1);
     throw err;
 });
 
