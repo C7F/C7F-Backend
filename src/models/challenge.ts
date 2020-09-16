@@ -3,7 +3,7 @@ export interface BaseChallenge {
     name: string;
     description: string;
     category: string;
-    tags: string;
+    tags: Array<string>;
     visible: boolean;
 }
 
