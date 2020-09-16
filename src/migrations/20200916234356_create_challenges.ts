@@ -1,4 +1,6 @@
 import * as Knex from 'knex';
+import logger from '../utils/logger';
+import { migrations } from '../utils/constants';
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('challenges', (table) => {
@@ -13,9 +15,15 @@ export async function up(knex: Knex): Promise<void> {
         table.float('initial_points');
         table.float('minimum_points');
         table.float('decay');
-    });
+    })
+        .then(() => {
+            logger.info(`${migrations.tableCreated}challenges`);
+        });
 }
 
 export async function down(knex: Knex): Promise<void> {
-    return knex.schema.dropTable('challenges');
+    return knex.schema.dropTable('challenges')
+        .then(() => {
+            logger.info(`${migrations.tableDropped}challenges`);
+        });
 }

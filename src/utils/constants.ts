@@ -12,3 +12,8 @@ export const database = {
     runMigrations: 'Running database migrations',
     ranMigrations: 'Migrations applied sucesfully!',
 };
+
+export const migrations = {
+    tableDropped: 'Table dropped: ',
+    tableCreated: 'Table created: ',
+};
