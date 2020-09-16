@@ -2,13 +2,14 @@
   "name": "c7f-backend",
   "version": "1.0.0",
   "description": "Backend for C7F platform.",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/app.ts",
     "build": "tsc",
     "lint": "eslint \"src/**/*.{ts,js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix",
+    "start": "node dist/app.js"
   },
   "repository": {
     "type": "git",
