@@ -2,13 +2,16 @@
   "name": "c7f-backend",
   "version": "1.0.0",
   "description": "Backend for C7F platform.",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev src/app.ts",
     "build": "tsc",
     "lint": "eslint \"src/**/*.{ts,js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix",
+    "start": "node dist/app.js",
+    "migrate:latest": "knex migrate:latest --knexfile ./src/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./src/knexfile.ts"
   },
   "repository": {
     "type": "git",
@@ -20,6 +23,11 @@
     "url": "https://github.com/C7F/C7F-Backend/issues"
   },
   "homepage": "https://github.com/C7F/C7F-Backend#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "dependencies": {
     "@types/cors": "^2.8.7",
     "bcrypt": "^5.0.0",
@@ -45,6 +53,7 @@
     "eslint": "^7.8.1",
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
+    "husky": "^4.3.0",
     "ts-node-dev": "^1.0.0-pre.62",
     "typescript": "^4.0.2"
   }

@@ -4,10 +4,13 @@ import jwt from 'jsonwebtoken';
 import { v4 } from 'uuid';
 
 import {
-    loginValidation, registerValidation, Team, tokenLoginValidation,
+    Team,
+    loginValidation,
+    registerValidation,
+    tokenLoginValidation,
 } from '../models/team';
 import knex from '../models/db';
-import { errors } from '../constants';
+import { errors } from '../utils/constants';
 
 async function generateJWT(team: Team) {
     return jwt.sign({
@@ -99,6 +102,7 @@ router.post('/register', async (req, res) => {
     const newTeam: Team = {
         id: v4(),
         name: req.body.name,
+        admin: false,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 10),
         verified: false,

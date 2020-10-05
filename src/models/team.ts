@@ -24,6 +24,7 @@ export interface Team {
     id: string;
     name: string;
     email: string;
+    admin: boolean;
     password: string;
     verified: boolean;
     login_token: string;
