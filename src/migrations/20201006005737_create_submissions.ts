@@ -6,7 +6,7 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('submissions', (table) => {
         table.uuid('id').unique().primary().notNullable();
         table.string('flag').notNullable();
-        table.string('team_id').notNullable().references('id').inTable('teams');
+        table.uuid('team_id').notNullable().references('id').inTable('teams');
         table.timestamp('submitted_at').defaultTo(knex.fn.now());
     });
 }
