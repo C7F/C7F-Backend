@@ -1,20 +1,18 @@
 import * as Knex from 'knex';
-import logger from '../utils/logger';
 import { migrations } from '../utils/constants';
+import logger from '../utils/logger';
 
 export async function up(knex: Knex): Promise<void> {
-    return knex.schema.createTable('flags', (table) => {
+    return knex.schema.createTable('submissions', (table) => {
         table.uuid('id').unique().primary().notNullable();
-        table.uuid('challenge_id').notNullable().references('id').inTable('challenges');
         table.string('flag').notNullable();
-    })
-        .then(() => {
-            logger.info(`${migrations.tableCreated}flags`);
-        });
+        table.string('team_id').notNullable().references('id').inTable('teams');
+        table.timestamp('submitted_at').defaultTo(knex.fn.now());
+    });
 }
 
 export async function down(knex: Knex): Promise<void> {
-    return knex.schema.dropTable('flags')
+    return knex.schema.dropTable('submissions')
         .then(() => {
             logger.info(`${migrations.tableDropped}flags`);
         });

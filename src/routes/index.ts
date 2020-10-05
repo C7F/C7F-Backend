@@ -10,6 +10,6 @@ router.use('/auth', authRouter);
 
 router.use(authorizeTeam);
 
-router.use('/challenge', challengeRouter);
+router.use('/challenges', challengeRouter);
 
 export default router;
