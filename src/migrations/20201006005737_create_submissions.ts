@@ -8,12 +8,14 @@ export async function up(knex: Knex): Promise<void> {
         table.string('flag').notNullable();
         table.uuid('team_id').notNullable().references('id').inTable('teams');
         table.timestamp('submitted_at').defaultTo(knex.fn.now());
+    }).then(() => {
+        logger.info(`${migrations.tableCreated}submissions`);
     });
 }
 
 export async function down(knex: Knex): Promise<void> {
     return knex.schema.dropTable('submissions')
         .then(() => {
-            logger.info(`${migrations.tableDropped}flags`);
+            logger.info(`${migrations.tableDropped}submissions`);
         });
 }
