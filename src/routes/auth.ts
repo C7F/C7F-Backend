@@ -102,6 +102,7 @@ router.post('/register', async (req, res) => {
     const newTeam: Team = {
         id: v4(),
         name: req.body.name,
+        admin: false,
         email: req.body.email,
         password: await bcrypt.hash(req.body.password, 10),
         verified: false,

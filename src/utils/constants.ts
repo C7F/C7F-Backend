@@ -4,6 +4,9 @@ export const errors = {
     invalidCredentials: 'invalidCredentials',
 
     invalidJWT: 'invalidJWT',
+    onlyAdminAllowed: 'onlyAdminAllowed',
+    challengeTypePointsMismatch: 'challengeTypePointsMismatch',
+    challengeNotUnique: 'challengeNotUnique',
 };
 
 export const database = {

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 import { errors } from '../utils/constants';
 
-export default function authorizeTeam(
+export function authorizeTeam(
     req: Express.Request,
     res: Express.Response,
     next: Express.NextFunction,
@@ -27,7 +27,22 @@ export default function authorizeTeam(
     } catch (err) {
         res.status(400).json({
             success: false,
-            message: errors.invalidJWT,
+            error: errors.invalidJWT,
+        });
+    }
+}
+
+export function authorizeAdmin(
+    _req: Express.Request,
+    res: Express.Response,
+    next: Express.NextFunction,
+): void {
+    if (res.locals.team && res.locals.team.admin) {
+        next();
+    } else {
+        res.status(403).json({
+            success: false,
+            error: errors.onlyAdminAllowed,
         });
     }
 }
