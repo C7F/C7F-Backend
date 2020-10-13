@@ -5,7 +5,7 @@ import { migrations } from '../utils/constants';
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('teams', (table) => {
         table.uuid('id').unique().primary().notNullable();
-        table.boolean('admin').unique().notNullable();
+        table.boolean('admin').notNullable();
         table.string('name', 255).unique().notNullable();
         table.string('email', 255).unique().notNullable();
         table.string('password', 60).unique().notNullable();
