@@ -8,11 +8,11 @@ export interface BaseChallenge {
     tags: Array<string>;
     flags: Array<string>;
     visible: boolean;
+    points: number;
 }
 
 export interface StaticChallenge extends BaseChallenge {
     type: 'static';
-    points: number;
 }
 
 export interface DynamicChallenge extends BaseChallenge {

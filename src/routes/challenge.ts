@@ -104,7 +104,7 @@ router.post('/submit', async (req, res) => {
     };
     knex<Submission>('submissions').insert(submission);
 
-    const challenge = await knex<Challenge>('challenges').select('id').where(req.body.flag, 'ANY(flags)').first();
+    const challenge = await knex<Challenge>('challenges').select('id').where('flags', '@>', [req.body.flag]).first();
 
     if (challenge) {
         return res.json({
@@ -118,7 +118,7 @@ router.post('/submit', async (req, res) => {
 });
 
 router.get('/', async (_req, res) => {
-    const challenges = await knex<Challenge>('challenges');
+    const challenges = await knex<Challenge>('challenges').select('id', 'category', 'description', 'name', 'tags', 'type', 'points').where('visible', true);
     return res.json({ success: true, challenges });
 });
 
