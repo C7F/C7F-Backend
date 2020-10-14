@@ -118,7 +118,7 @@ router.post('/submit', async (req, res) => {
 });
 
 router.get('/', async (_req, res) => {
-    const challenges = await knex<Challenge>('challenges');
+    const challenges = await knex<Challenge>('challenges').select('id', 'category', 'description', 'name', 'tags', 'type', 'points').where('visible', true);
     return res.json({ success: true, challenges });
 });
 
