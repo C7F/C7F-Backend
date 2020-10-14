@@ -10,6 +10,9 @@ const config = {
     migrations: {
         directory: join(__dirname, 'migrations'),
     },
+    seeds: {
+        directory: join(__dirname, 'seeds'),
+    },
 };
 
 export default config;
