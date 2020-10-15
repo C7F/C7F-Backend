@@ -13,7 +13,7 @@ export const database = {
     connectionSuccess: 'Database connection successful.',
     connectionFailure: 'Database connection failure.',
     runMigrations: 'Running database migrations',
-    ranMigrations: 'Migrations applied sucesfully!',
+    ranMigrations: 'Migrations applied successfully!',
 };
 
 export const migrations = {
